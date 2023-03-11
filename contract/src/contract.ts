@@ -88,7 +88,7 @@ class Contract {
   token_by_id: LookupMap<Token>;
   tokenList: Array<Token>;
 
-  // owner_by_id: UnorderedMap<string>;
+  owner_by_id: LookupMap<string>;
 
   constructor() {
     this.token_id = "";
@@ -96,15 +96,16 @@ class Contract {
     this.token_by_id = new LookupMap("T");
     this.tokenList = [];
 
-    // this.owner_by_id = new UnorderedMap("O");
+    this.owner_by_id = new LookupMap("O");
   }
 
   @initialize({})
   init({ owner_id }: { owner_id: string }) {
-    this.token_id = "";
     this.owner_id = owner_id;
-    this.token_by_id = new LookupMap("T");
-    this.tokenList = [];
+
+    // this.token_id = "";
+    // this.token_by_id = new LookupMap("T");
+    // this.tokenList = [];
   }
 
   @call({})
@@ -115,7 +116,7 @@ class Contract {
     this.token_by_id.set(token_id, token);
     this.tokenList.push(token);
 
-    // this.owner_by_id.set(token_id, owner_id);
+    this.owner_by_id.set(token_id, owner_id);
 
     return token;
   }
